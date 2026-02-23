@@ -1,0 +1,30 @@
+# --- IDE / System Files ---
+.idea/
+*.iml
+.DS_Store
+out/
+build/
+.vscode/
+
+# --- Java / Maven Backend ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+mvnw
+mvnw.cmd
+
+# --- React / Node.js Frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+
+# --- Logs and Temp ---
+*.log
+temp/
+tmp/

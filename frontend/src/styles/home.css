@@ -1,0 +1,53 @@
+.home-background {
+    width: 100vw;
+    height: 100vh;
+    /* Use your GIF as background */
+    background: url("../assets/pokemonGym.gif") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.content-box {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black box for readability */
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    border: 2px solid #ffcb05; /* Pokemon Yellow border */
+}
+
+/* The magic for side-by-side buttons */
+.button-group {
+    display: flex;
+    gap: 20px;           /* Space between buttons */
+    justify-content: center;
+    margin: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    transition: transform 0.2s, background 0.2s;
+    gap: 20px
+}
+
+.btn:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.yes-btn {
+    background-color: #4caf50; /* Green */
+    color: white;
+}
+
+.no-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}

@@ -1,0 +1,487 @@
+/* ===========================
+   Layout
+   =========================== */
+.battle-screen {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.opponent-area,
+.player-area {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 115px;
+}
+
+.pokemon-pic {
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* ===========================
+   Turn Indicator
+   =========================== */
+.turn-indicator {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background: #333;
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* ===========================
+   Grass Field Background
+   =========================== */
+.field {
+    width: 520px;
+    height: 320px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+            repeating-linear-gradient(
+                    120deg,
+                    rgba(0, 80, 0, 0.4) 0px,
+                    rgba(0, 80, 0, 0.4) 3px,
+                    transparent 3px,
+                    transparent 12px
+            ),
+            repeating-linear-gradient(
+                    60deg,
+                    rgba(0, 120, 0, 0.4) 0px,
+                    rgba(0, 120, 0, 0.4) 3px,
+                    transparent 3px,
+                    transparent 12px
+            ),
+            linear-gradient(to bottom, #3ba63b, #2e8b2e);
+}
+
+/* ===========================
+   Platforms
+   =========================== */
+.pokemon-platform {
+    position: absolute;
+    width: 200px; /* Slightly wider for better look */
+    height: 50px;
+    background: radial-gradient(circle, rgba(0,0,0,0.3), rgba(0,0,0,0));
+    border-radius: 50%;
+}
+
+.opponent-platform {
+    top: 100px;
+    right: 10%; /* Pushed further right */
+}
+
+.player-platform {
+    bottom: 20px;
+    left: 10%; /* Pushed further left */
+}
+
+/* ===========================
+   Sprites
+   =========================== */
+.opponent-sprite {
+    position: absolute;
+    top: 20px; /* Adjusted to sit on platform */
+    right: 12%; /* Pushed further right */
+    width: 140px;
+    z-index: 2;
+}
+
+.player-sprite {
+    position: absolute;
+    bottom: 60px; /* Adjusted to sit on platform */
+    left: 12%; /* Pushed further left */
+    top: 145px;
+    width: 180px; /* Player sprite is usually larger (closer to camera) */
+    z-index: 2;
+}
+
+/* ===========================
+   Floating Damage Numbers
+   =========================== */
+/* Adjust these to follow the new sprite positions */
+.damage-popup.opponent-target {
+    top: 40px;
+    right: 15%;
+}
+
+.damage-popup.player-target {
+    bottom: 100px;
+    left: 15%;
+}
+
+/* ===========================
+   Hit Shake Animation
+   =========================== */
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    20% { transform: translate(-8px, 0px); }
+    40% { transform: translate(8px, 0px); }
+    60% { transform: translate(-8px, 0px); }
+    80% { transform: translate(8px, 0px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+.hit-shake {
+    animation: shake 0.4s ease;
+}
+
+/* ===========================
+   KO Animation (Modern Fade + Scale)
+   =========================== */
+@keyframes koFade {
+    0% { opacity: 1; transform: scale(1) translateY(0); }
+    100% { opacity: 0; transform: scale(0.5) translateY(40px); }
+}
+
+.ko-animation {
+    animation: koFade 0.8s ease forwards;
+}
+
+/* ===========================
+   Floating Damage Numbers
+   =========================== */
+.damage-popup {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4444;
+    animation: floatUp 0.8s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0px); }
+    100% { opacity: 0; transform: translateY(-40px); }
+}
+
+/* ===========================
+   Attack Animations
+   =========================== */
+.attack-animation {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* FIREBALL */
+.fireball {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #ff6600, #cc3300);
+    border-radius: 50%;
+    animation: fireballMove 0.6s linear forwards;
+}
+
+@keyframes fireballMove {
+    0% { transform: translate(20%, 60%); opacity: 1; }
+    100% { transform: translate(60%, -20%); opacity: 0; }
+}
+
+/* LIGHTNING */
+.lightning {
+    width: 6px;
+    height: 60px;
+    background: yellow;
+    animation: lightningStrike 0.4s ease-out forwards;
+}
+
+@keyframes lightningStrike {
+    0% { opacity: 0; transform: translate(60%, -20%) scaleY(0.2); }
+    100% { opacity: 1; transform: translate(20%, 60%) scaleY(1); }
+}
+
+/* WATER SPLASH */
+.water {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #66ccff, #0099ff);
+    border-radius: 50%;
+    animation: waterSplash 0.7s ease-out forwards;
+}
+
+@keyframes waterSplash {
+    0% { transform: translate(20%, 60%) scale(0.5); opacity: 1; }
+    100% { transform: translate(60%, -20%) scale(1.5); opacity: 0; }
+}
+
+/* LEAF BLADE */
+.leaf {
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(to right, #66cc33, #339900);
+    border-radius: 20px;
+    animation: leafBlade 0.7s ease-out forwards;
+}
+
+@keyframes leafBlade {
+    0% { transform: translate(20%, 60%) rotate(0deg); opacity: 1; }
+    100% { transform: translate(60%, -20%) rotate(360deg); opacity: 0; }
+}
+
+/* SHADOW BALL */
+.shadow {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #9933ff, #330066);
+    border-radius: 50%;
+    animation: shadowBall 0.7s ease-out forwards;
+}
+
+@keyframes shadowBall {
+    0% { transform: translate(20%, 60%) scale(0.8); opacity: 1; }
+    100% { transform: translate(60%, -20%) scale(1.4); opacity: 0; }
+}
+
+/* ENERGY BEAM */
+.beam {
+    width: 120px;
+    height: 10px;
+    background: linear-gradient(to right, yellow, white, yellow);
+    animation: beamShot 0.5s linear forwards;
+}
+
+@keyframes beamShot {
+    0% { transform: translate(20%, 60%) scaleX(0.2); opacity: 1; }
+    100% { transform: translate(60%, -20%) scaleX(1.2); opacity: 0; }
+}
+
+/* ===========================
+   HP Bar Effects
+   =========================== */
+.hpbar {
+    width: 220px;
+    transition: transform 0.2s ease;
+}
+
+.hpbar-track {
+    background: #ddd;
+    height: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hpbar-fill {
+    height: 100%;
+}
+
+/* Critical hit flash */
+.hp-flash {
+    animation: hpFlash 0.5s ease;
+}
+
+@keyframes hpFlash {
+    0% { filter: brightness(2); }
+    100% { filter: brightness(1); }
+}
+
+/* Low HP pulsing */
+.hp-low .hpbar-fill {
+    animation: hpPulse 1s infinite alternate;
+}
+
+@keyframes hpPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.5); }
+}
+
+/* ===========================
+   Victory / Defeat Overlay
+   =========================== */
+.battle-result-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px); /* Blurs the battle behind the popup */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* The Result Card */
+.battle-result-box {
+    background: #2c3e50;
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 350px;
+    border: 4px solid #ffcb05; /* Pokemon Yellow */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    animation: scaleUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result-header {
+    margin-bottom: 20px;
+}
+
+.result-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.result-title {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Dynamic Colors based on result */
+.battle-result-overlay.victory .result-title { color: #4caf50; }
+.battle-result-overlay.defeat .result-title { color: #f44336; }
+
+.result-message {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #ecf0f1;
+}
+
+.result-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
+
+.replay-text {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.replay-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.replay-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 100px;
+}
+
+.replay-btn.yes-btn {
+    background: #ffcb05;
+    color: #2c3e50;
+}
+
+.replay-btn.no-btn {
+    background: #7f8c8d;
+    color: white;
+}
+
+.replay-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ===========================
+   Move Buttons
+   =========================== */
+.move-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.move-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #1976d2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    min-width: 140px;
+}
+
+.move-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===========================
+   Battle Log
+   =========================== */
+.battle-log {
+    width: 750px;
+    max-height: 100%;
+    overflow: auto;
+    /*background: rgba(0,0,0,0.05);*/
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 35px;
+}
+
+.log-line {
+    margin-bottom: 6px;
+}
+
+/* ==========================================================
+   NEW: Replay Prompt Buttons (Battle Again? Yes / No)
+   ========================================================== */
+.replay-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.yes-btn,
+.no-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+.yes-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.no-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+
+
