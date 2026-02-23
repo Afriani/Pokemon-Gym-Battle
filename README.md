@@ -1,3 +1,5 @@
+![Battle Screen](./frontend/src/assets/pokemon.jpg)
+
 # 🛡️ Pokémon Gym Battle Simulator
 
 A full-stack Pokémon battle engine featuring a **Java Spring Boot** backend and a **React + Vite** frontend. This project simulates a classic Pokémon gym experience with real-time combat logic, dynamic animations, and authentic sound effects.
@@ -55,3 +57,5 @@ A full-stack Pokémon battle engine featuring a **Java Spring Boot** backend and
    ```bash
    git clone https://github.com/your-username/pokemon-gym-battle.git
    cd pokemon-gym-battle
+
+![Battle Screen](./frontend/src/assets/pokemonandfriends.gif)
