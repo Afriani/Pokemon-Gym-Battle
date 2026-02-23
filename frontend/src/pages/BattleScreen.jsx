@@ -106,11 +106,11 @@ export default function BattleScreen({ initialState }) {
             (async () => {
                 const chosen = selectedPokemon;
 
-                const res = await axios.post("/api/battle/start", {
+                const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
+                const res = await axios.post(`${API_BASE_URL}/api/battle/start`, {
                     name: chosen.name,
                     type: chosen.type,
-                    // maxHp: chosen.maxHp,
-                    // hp: chosen.hp
                 });
 
 
@@ -174,7 +174,9 @@ export default function BattleScreen({ initialState }) {
         setTurnText("Opponent's turn…");
 
         try {
-            const res = await axios.post("/api/battle/attack", {
+            const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+
+            const res = await axios.post(`${API_BASE_URL}/api/battle/attack`, {
                 battleId: state.battleId,
                 move: moveName,
                 difficulty: "normal"

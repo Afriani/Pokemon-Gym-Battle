@@ -1,4 +1,4 @@
-![Battle Screen](./frontend/src/assets/pokemon.jpg)
+![Battle Screen](./frontend/src/assets/pokemon.JPG)
 
 # 🛡️ Pokémon Gym Battle Simulator
 
