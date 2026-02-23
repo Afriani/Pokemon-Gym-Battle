@@ -7,7 +7,8 @@ import java.util.Map;
 @RequestMapping("/api/battle")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-        "https://pokemon-gym-battle.vercel.app/"
+        "https://pokemon-gym-battle.vercel.app/",
+        "https://pokemon-gym-battle-as-projects-dad4deca.vercel.app"
 })
 public class BattleController {
 
