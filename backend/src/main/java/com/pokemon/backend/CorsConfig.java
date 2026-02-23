@@ -14,7 +14,12 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://pokemon-gym-battle.vercel.app",
+                                "https://pokemon-gym-battle-git-main-as-projects-dad4deca.vercel.app",
+                                "https://pokemon-gym-battle-as-projects-dad4deca.vercel.app"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -23,5 +28,3 @@ public class CorsConfig {
     }
 
 }
-
-
